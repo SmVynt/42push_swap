@@ -6,13 +6,13 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:35:02 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/06 15:39:38 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/11 22:35:04 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack	*ft_add_new(int value_init, char parent)
+t_stack	*ft_add_new(int value_init, t_stack **head)
 {
 	t_stack *new;
 
@@ -20,7 +20,7 @@ t_stack	*ft_add_new(int value_init, char parent)
 	if (!new)
 		return (NULL);
 	new->value_init = value_init;
-	new->parent = parent;
+	new->head = head;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);
@@ -39,6 +39,7 @@ t_stack	*ft_add_back(t_stack **stack, t_stack *new)
 		new->prev = new;
 		return (new);
 	}
+	new->head = stack;
 	last = (*stack)->prev;
 	last->next = new;
 	new->prev = last;
@@ -60,6 +61,7 @@ t_stack	*ft_add_front(t_stack **stack, t_stack *new)
 		new->prev = new;
 		return (new);
 	}
+	new->head = stack;
 	last = (*stack)->prev;
 	new->next = *stack;
 	new->prev = last;

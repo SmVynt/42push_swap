@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:34:59 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/06 12:24:43 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/11 21:10:59 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,17 @@ void	ft_read_args(int argc, char **argv, t_stack **A)
 	t_stack	*tmp;
 
 	i = 0;
-	*A = NULL;
 	while (++i < argc && !*error_status())
 	{
 		j = 0;
 		while (argv[i][j])
 		{
+			printf("%ld\n", i);
 			if (argv[i][j] == '-' || (argv[i][j] >= '0' && argv[i][j] <= '9'))
 			{
 				num = ft_read_number(&j, argv[i]);
-				tmp = ft_add_new(num, 'A');
-				if (!ft_add_back(A, tmp))
+				tmp = ft_add_new(num, A);
+				if (!tmp || !ft_add_back(A, tmp))
 					return (set_error(1), ft_free(A));
 			}
 			else if (argv[i][j] == ' ')
