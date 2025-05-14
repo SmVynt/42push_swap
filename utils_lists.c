@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:35:02 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/11 22:35:04 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/14 21:40:39 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_stack	*ft_add_new(int value_init, t_stack **head)
 {
-	t_stack *new;
+	t_stack	*new;
 
 	new = (t_stack *)malloc(sizeof(t_stack));
 	if (!new)
@@ -28,7 +28,7 @@ t_stack	*ft_add_new(int value_init, t_stack **head)
 
 t_stack	*ft_add_back(t_stack **stack, t_stack *new)
 {
-	t_stack *last;
+	t_stack	*last;
 
 	if (!new)
 		return (NULL);
@@ -50,7 +50,7 @@ t_stack	*ft_add_back(t_stack **stack, t_stack *new)
 
 t_stack	*ft_add_front(t_stack **stack, t_stack *new)
 {
-	t_stack *last;
+	t_stack	*last;
 
 	if (!stack || !new)
 		return (NULL);
@@ -73,11 +73,11 @@ t_stack	*ft_add_front(t_stack **stack, t_stack *new)
 
 void	ft_free(t_stack **stack)
 {
-	t_stack *tmp;
-	t_stack *cur;
+	t_stack	*tmp;
+	t_stack	*cur;
 
 	if (!stack || !*stack)
-		return;
+		return ;
 	cur = *stack;
 	(*stack)->prev->next = NULL;
 	while (cur)

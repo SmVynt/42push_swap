@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/14 21:38:54 by psmolin           #+#    #+#             */
+/*   Updated: 2025/05/14 21:38:58 by psmolin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -8,7 +20,7 @@
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648
 
-typedef struct s_stack t_stack;
+typedef struct s_stack	t_stack;
 
 struct s_stack
 {
@@ -19,7 +31,6 @@ struct s_stack
 	t_stack	*next;
 	t_stack	*prev;
 };
-
 
 void	ft_read_args(int arc, char **argv, t_stack **A);
 void	ft_print_stack(t_stack **stack);

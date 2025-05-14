@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 18:59:06 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/11 23:00:58 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/14 21:46:15 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	ft_move(t_stack **SRC, t_stack **DST)
 	*SRC = (*SRC)->next;
 	(*SRC)->prev = tmp->prev;
 	(*SRC)->prev->next = *SRC;
+	if (tmp->next == tmp)
+		*SRC = NULL;
 	ft_add_front(DST, tmp);
 }
 

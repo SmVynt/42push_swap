@@ -6,13 +6,13 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:34:59 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/11 21:10:59 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/14 21:51:32 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int ft_read_number(ssize_t *i, char *str)
+static int	ft_read_number(ssize_t *i, char *str)
 {
 	int			sign;
 	long long	result;
@@ -68,7 +68,10 @@ void	ft_print_stack(t_stack **stack)
 	t_stack	*tmp;
 
 	if (!stack || !*stack)
+	{
+		printf("\n");
 		return ;
+	}
 	tmp = *stack;
 	while (tmp)
 	{
