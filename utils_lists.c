@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:35:02 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/14 21:40:39 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/15 15:19:26 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,23 @@ void	ft_free(t_stack **stack)
 		cur = tmp;
 	}
 	*stack = NULL;
+}
+
+void	ft_print_stack(t_stack **stack)
+{
+	t_stack	*tmp;
+
+	if (!stack || !*stack)
+	{
+		printf("\n");
+		return ;
+	}
+	tmp = *stack;
+	while (tmp)
+	{
+		printf("%d -> %d\n", tmp->value_init, tmp->value);
+		tmp = tmp->next;
+		if (tmp == *stack)
+			break ;
+	}
 }

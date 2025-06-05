@@ -6,7 +6,7 @@
 #    By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 16:14:14 by psmolin           #+#    #+#              #
-#    Updated: 2025/05/11 21:08:35 by psmolin          ###   ########.fr        #
+#    Updated: 2025/05/15 14:52:50 by psmolin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRCS = \
 		initialize.c \
 		swap_commands_1.c \
 		utils_lists.c \
+		utils_lists2.c \
 		utils.c
 OBJS = $(SRCS:.c=.o)
 #
@@ -50,6 +51,7 @@ norm:
 		initialize.c \
 		swap_commands_1.c \
 		utils_lists.c \
+		utils_lists2.c \
 		utils.c \
 		push_swap.h
 

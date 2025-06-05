@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 21:38:54 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/14 21:38:58 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/06/05 10:07:57 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
-
-# define INT_MAX 2147483647
-# define INT_MIN -2147483648
+# include <limits.h>
 
 typedef struct s_stack	t_stack;
 
@@ -45,7 +43,11 @@ void	ft_swap(t_stack **A, t_stack **B);
 void	ft_move(t_stack **SRC, t_stack **DST);
 void	ft_switch(t_stack **S);
 
+int		ft_check_input(t_stack **stack);
+int		ft_solve(t_stack **a, t_stack **b);
+
 ssize_t	*error_status(void);
 void	set_error(ssize_t error);
+void	ft_exit_error(char *message);
 
 #endif

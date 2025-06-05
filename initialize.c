@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:34:59 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/14 21:55:33 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/15 15:53:40 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,39 +47,18 @@ void	ft_read_args(int argc, char **argv, t_stack **A)
 		j = 0;
 		while (argv[i][j])
 		{
-			printf("%ld\n", i);
 			if (argv[i][j] == '-' || (argv[i][j] >= '0' && argv[i][j] <= '9'))
 			{
 				num = ft_read_number(&j, argv[i]);
 				tmp = ft_add_new(num, A);
 				if (!tmp || !ft_add_back(A, tmp))
-					return (set_error(1), ft_free(A));
+					return (set_error(1));
 			}
 			else if (argv[i][j] == ' ')
 				j++;
 			else
-				return (set_error(1), ft_free(A));
+				return (set_error(1));
 		}
 	}
 }
 
-void	ft_print_stack(t_stack **stack)
-{
-	t_stack	*tmp;
-
-	if (!stack || !*stack)
-	{
-		printf("\n");
-		return ;
-	}
-	tmp = *stack;
-	while (tmp)
-	{
-		printf("%d ", tmp->value_init);
-		tmp = tmp->next;
-		if (tmp == *stack)
-			break ;
-	}
-	printf("\n");
-
-}
