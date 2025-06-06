@@ -6,7 +6,7 @@
 #    By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 16:14:14 by psmolin           #+#    #+#              #
-#    Updated: 2025/06/06 11:07:37 by psmolin          ###   ########.fr        #
+#    Updated: 2025/06/06 14:03:42 by psmolin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,10 @@ SRCS_DIR = src/
 SRCS = \
 	$(SRCS_DIR)main.c \
 	$(SRCS_DIR)initialize.c \
-	$(SRCS_DIR)swap_commands_1.c \
+	$(SRCS_DIR)swap_commands.c \
+	$(SRCS_DIR)swap_commands_r.c \
+	$(SRCS_DIR)swap_commands_rr.c \
+	$(SRCS_DIR)swap_commands_sp.c \
 	$(SRCS_DIR)utils_lib.c \
 	$(SRCS_DIR)utils_lists.c \
 	$(SRCS_DIR)utils_lists2.c \
@@ -52,7 +55,10 @@ norm:
 	norminette \
 		$(SRCS_DIR)main.c \
 		$(SRCS_DIR)initialize.c \
-		$(SRCS_DIR)swap_commands_1.c \
+		$(SRCS_DIR)swap_commands.c \
+		$(SRCS_DIR)swap_commands_r.c \
+		$(SRCS_DIR)swap_commands_rr.c \
+		$(SRCS_DIR)swap_commands_sp.c \
 		$(SRCS_DIR)utils_lib.c \
 		$(SRCS_DIR)utils_lists.c \
 		$(SRCS_DIR)utils_lists2.c \

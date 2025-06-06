@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:34:48 by psmolin           #+#    #+#             */
-/*   Updated: 2025/06/06 11:02:13 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/06/06 14:16:03 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,17 @@ int	main(int arc, char **argv)
 	ft_solve(&a, &b);
 	ft_free(&a);
 	ft_free(&b);
+	printf("%d\n", ft_num2n(5, 0));
+	printf("%d\n", ft_num2n(5, 1));
+	printf("%d\n", ft_num2n(5, 2));
+	printf("%d\n", ft_num2n(5, 3));
+	printf("%d\n", ft_num2n(5, 4));
+	printf("------------\n");
+	printf("%d\n", ft_num3n(5, 0));
+	printf("%d\n", ft_num3n(5, 1));
+	printf("%d\n", ft_num3n(5, 2));
+	printf("%d\n", ft_num3n(5, 3));
+	printf("%d\n", ft_num3n(5, 4));
 	return (0);
 }
 

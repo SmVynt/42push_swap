@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 21:38:54 by psmolin           #+#    #+#             */
-/*   Updated: 2025/06/06 11:05:55 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/06/06 14:50:38 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,24 @@ void	ft_swap(t_stack **A, t_stack **B);
 void	ft_move(t_stack **SRC, t_stack **DST);
 void	ft_switch(t_stack **S);
 
+int		ft_sa(t_stack **a);
+int		ft_sb(t_stack **b);
+int		ft_ss(t_stack **a, t_stack **b);
+int		ft_pa(t_stack **a, t_stack **b);
+int		ft_pb(t_stack **a, t_stack **b);
+int		ft_ra(t_stack **a);
+int		ft_rb(t_stack **b);
+int		ft_rr(t_stack **a, t_stack **b);
+int		ft_rra(t_stack **a);
+int		ft_rrb(t_stack **b);
+int		ft_rrr(t_stack **a, t_stack **b);
+
 int		ft_check_input(t_stack **stack);
 int		ft_solve(t_stack **a, t_stack **b);
 
 int		ft_print(char *str);
+int		ft_num2n(int num, int n);
+int		ft_num3n(int num, int n);
 
 ssize_t	*error_status(void);
 void	set_error(ssize_t error);

@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:35:02 by psmolin           #+#    #+#             */
-/*   Updated: 2025/06/06 11:06:32 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/06/06 14:15:32 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,44 @@ int	ft_print(char *str)
 		len++;
 	}
 	return (len);
+}
+
+/**
+ * @brief function that gives n's digit of num
+ * in the base 2.
+ *
+ * @param num The number to convert.
+ * @param n The digit position
+ * (0 for the rightest bit).
+ *
+ * @return Returns the n-th digit of num in base 2.
+ */
+int	ft_num2n(int num, int n)
+{
+	int	i;
+
+	i = 0;
+	while (i++ < n)
+		num = num / 2;
+	return (num % 2);
+}
+
+/**
+ * @brief function that gives n's digit of num
+ * in the base 3.
+ *
+ * @param num The number to convert.
+ * @param n The digit position
+ * (0 for the rightest bit).
+ *
+ * @return Returns the n-th digit of num in base 2.
+ */
+int	ft_num3n(int num, int n)
+{
+	int	i;
+
+	i = 0;
+	while (i++ < n)
+		num = num / 3;
+	return (num % 3);
 }
