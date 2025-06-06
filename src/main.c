@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:34:48 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/15 16:10:08 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/06/06 11:02:13 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ int	main(int arc, char **argv)
 	a = NULL;
 	b = NULL;
 	ft_read_args(arc, argv, &a);
-	ft_check_input(&a);
+	if (*error_status() != 0)
+		ft_exit_error("Invalid input", &a, &b);
+	if (ft_check_input(&a) == -1)
+		ft_exit_error("Duplicate values found", &a, &b);
 	ft_print_stack(&a);
 	ft_solve(&a, &b);
 	ft_free(&a);

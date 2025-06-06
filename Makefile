@@ -6,7 +6,7 @@
 #    By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 16:14:14 by psmolin           #+#    #+#              #
-#    Updated: 2025/05/15 14:52:50 by psmolin          ###   ########.fr        #
+#    Updated: 2025/06/06 11:07:37 by psmolin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,15 +16,17 @@ HEADERS = push_swap.h
 CC = cc
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror -I.
+SRCS_DIR = src/
 
 #
 SRCS = \
-		main.c \
-		initialize.c \
-		swap_commands_1.c \
-		utils_lists.c \
-		utils_lists2.c \
-		utils.c
+	$(SRCS_DIR)main.c \
+	$(SRCS_DIR)initialize.c \
+	$(SRCS_DIR)swap_commands_1.c \
+	$(SRCS_DIR)utils_lib.c \
+	$(SRCS_DIR)utils_lists.c \
+	$(SRCS_DIR)utils_lists2.c \
+	$(SRCS_DIR)utils_error.c
 OBJS = $(SRCS:.c=.o)
 #
 %.o: %.c $(HEADERS)
@@ -47,12 +49,14 @@ re: fclean all
 bonus: all
 
 norm:
-	norminette	main.c \
-		initialize.c \
-		swap_commands_1.c \
-		utils_lists.c \
-		utils_lists2.c \
-		utils.c \
-		push_swap.h
+	norminette \
+		$(SRCS_DIR)main.c \
+		$(SRCS_DIR)initialize.c \
+		$(SRCS_DIR)swap_commands_1.c \
+		$(SRCS_DIR)utils_lib.c \
+		$(SRCS_DIR)utils_lists.c \
+		$(SRCS_DIR)utils_lists2.c \
+		$(SRCS_DIR)utils_error.c \
+		$(SRCS_DIR)push_swap.h
 
 .PHONY: all clean fclean re bonus norm

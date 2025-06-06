@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:34:59 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/15 15:53:40 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/06/06 11:06:43 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static int	ft_read_number(ssize_t *i, char *str)
 		sign = -1;
 		(*i)++;
 	}
+	if (str[*i] <= '0' || str[*i] > '9')
+		return (set_error(1), 0);
 	while (str[*i] >= '0' && str[*i] <= '9')
 	{
 		result = result * 10 + (str[*i] - '0') * sign;
@@ -61,4 +63,3 @@ void	ft_read_args(int argc, char **argv, t_stack **A)
 		}
 	}
 }
-

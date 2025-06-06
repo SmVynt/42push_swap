@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 21:38:54 by psmolin           #+#    #+#             */
-/*   Updated: 2025/06/05 10:07:57 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/06/06 11:05:55 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,15 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <limits.h>
+
+# define COLOR_R "\033[31m"
+# define COLOR_G "\033[32m"
+# define COLOR_Y "\033[33m"
+# define COLOR_B "\033[34m"
+# define COLOR_M "\033[35m"
+# define COLOR_C "\033[36m"
+# define COLOR_W "\033[37m"
+# define COLOR_X "\033[0m"
 
 typedef struct s_stack	t_stack;
 
@@ -46,8 +55,10 @@ void	ft_switch(t_stack **S);
 int		ft_check_input(t_stack **stack);
 int		ft_solve(t_stack **a, t_stack **b);
 
+int		ft_print(char *str);
+
 ssize_t	*error_status(void);
 void	set_error(ssize_t error);
-void	ft_exit_error(char *message);
+void	ft_exit_error(char *message, t_stack **a, t_stack **b);
 
 #endif
