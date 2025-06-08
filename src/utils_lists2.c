@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:35:02 by psmolin           #+#    #+#             */
-/*   Updated: 2025/06/06 11:00:56 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/06/08 12:58:27 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,9 @@ int	ft_check_input(t_stack **stack)
 	return (0);
 }
 
-int	ft_solve(t_stack **a, t_stack **b)
+int	ft_solve(t_stacks *stacks)
 {
-	(void)a;
-	(void)b;
+	(void)stacks;
 	printf("sorted\n");
 	return (0);
 }

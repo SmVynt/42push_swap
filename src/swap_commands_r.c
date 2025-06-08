@@ -6,43 +6,43 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 18:59:06 by psmolin           #+#    #+#             */
-/*   Updated: 2025/06/06 12:05:20 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/06/08 19:33:36 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_ra(t_stack **a)
+int	ft_ra(t_stacks *stacks)
 {
-	if (!*a || !(*a)->next)
+	if (!stacks->a || !(*stacks->a)->next)
 		return (1);
-	ft_roll_up(a);
+	ft_roll_up(stacks->a);
 	ft_print("ra\n");
 	return (0);
 }
 
-int	ft_rb(t_stack **b)
+int	ft_rb(t_stacks *stacks)
 {
-	if (!*b || !(*b)->next)
+	if (!stacks->b || !(*stacks->b)->next)
 		return (1);
-	ft_roll_up(b);
+	ft_roll_up(stacks->b);
 	ft_print("rb\n");
 	return (0);
 }
 
-int	ft_rr(t_stack **a, t_stack **b)
+int	ft_rr(t_stacks *stacks)
 {
 	int	done;
 
 	done = 0;
-	if ((*a) && (*a)->next)
+	if ((stacks->a) && (*stacks->a)->next)
 	{
-		ft_roll_up(a);
+		ft_roll_up(stacks->a);
 		done = 1;
 	}
-	if ((*b) && (*b)->next)
+	if ((stacks->b) && (*stacks->b)->next)
 	{
-		ft_roll_up(b);
+		ft_roll_up(stacks->b);
 		done = 1;
 	}
 	if (done == 0)

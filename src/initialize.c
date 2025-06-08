@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:34:59 by psmolin           #+#    #+#             */
-/*   Updated: 2025/06/06 11:06:43 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/06/08 19:40:57 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	ft_read_number(ssize_t *i, char *str)
 	return ((int)result);
 }
 
-void	ft_read_args(int argc, char **argv, t_stack **A)
+void	ft_read_args(int argc, char **argv, t_stacks *stacks)
 {
 	ssize_t	i;
 	ssize_t	j;
@@ -52,8 +52,9 @@ void	ft_read_args(int argc, char **argv, t_stack **A)
 			if (argv[i][j] == '-' || (argv[i][j] >= '0' && argv[i][j] <= '9'))
 			{
 				num = ft_read_number(&j, argv[i]);
-				tmp = ft_add_new(num, A);
-				if (!tmp || !ft_add_back(A, tmp))
+				tmp = ft_add_new(num, stacks->a);
+				stacks->size_a++;
+				if (!tmp || !ft_add_back(stacks->a, tmp))
 					return (set_error(1));
 			}
 			else if (argv[i][j] == ' ')

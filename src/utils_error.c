@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:35:05 by psmolin           #+#    #+#             */
-/*   Updated: 2025/06/06 11:11:48 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/06/08 13:41:09 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@
 **/
 void	set_error(ssize_t error)
 {
-	// ssize_t	*status;
-	// status = error_status();
-	// *status = error;
 	*error_status() = error;
 }
 
@@ -35,10 +32,10 @@ ssize_t	*error_status(void)
 	return (&status);
 }
 
-void	ft_exit_error(char *message, t_stack **a, t_stack **b)
+void	ft_exit_error(char *message, t_stacks *stacks)
 {
-	ft_free(a);
-	ft_free(b);
+	ft_free(stacks->a);
+	ft_free(stacks->b);
 	ft_print(COLOR_R "Error\n" COLOR_Y);
 	ft_print(message);
 	ft_print("\n" COLOR_X);

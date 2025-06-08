@@ -6,43 +6,43 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 18:59:06 by psmolin           #+#    #+#             */
-/*   Updated: 2025/06/06 12:04:32 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/06/08 19:38:33 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_sa(t_stack **a)
+int	ft_sa(t_stacks *stacks)
 {
-	if (!*a || !(*a)->next)
+	if (!stacks->a || !(*stacks->a)->next)
 		return (1);
-	ft_switch(a);
+	ft_switch(stacks->a);
 	ft_print("sa\n");
 	return (0);
 }
 
-int	ft_sb(t_stack **b)
+int	ft_sb(t_stacks *stacks)
 {
-	if (!*b || !(*b)->next)
+	if (!stacks->b || !(*stacks->b)->next)
 		return (1);
-	ft_switch(b);
+	ft_switch(stacks->b);
 	ft_print("sb\n");
 	return (0);
 }
 
-int	ft_ss(t_stack **a, t_stack **b)
+int	ft_ss(t_stacks *stacks)
 {
 	int	done;
 
 	done = 0;
-	if ((*a) && (*a)->next)
+	if ((stacks->a) && (*stacks->a)->next)
 	{
-		ft_switch(a);
+		ft_switch(stacks->a);
 		done = 1;
 	}
-	if ((*b) && (*b)->next)
+	if ((stacks->b) && (*stacks->b)->next)
 	{
-		ft_switch(b);
+		ft_switch(stacks->b);
 		done = 1;
 	}
 	if (done == 0)
@@ -51,20 +51,24 @@ int	ft_ss(t_stack **a, t_stack **b)
 	return (0);
 }
 
-int	ft_pa(t_stack **a, t_stack **b)
+int	ft_pa(t_stacks *stacks)
 {
-	if (!*b)
+	if (stacks->size_b <= 0 || !stacks->b)
 		return (1);
-	ft_move(b, a);
+	ft_move(stacks->b, stacks->a);
+	stacks->size_a++;
+	stacks->size_b--;
 	ft_print("pa\n");
 	return (0);
 }
 
-int	ft_pb(t_stack **a, t_stack **b)
+int	ft_pb(t_stacks *stacks)
 {
-	if (!*a)
+	if (stacks->size_a <= 0 || !stacks->a)
 		return (1);
-	ft_move(a, b);
+	ft_move(stacks->a, stacks->b);
+	stacks->size_b++;
+	stacks->size_a--;
 	ft_print("pb\n");
 	return (0);
 }

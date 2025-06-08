@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 21:38:54 by psmolin           #+#    #+#             */
-/*   Updated: 2025/06/06 14:50:38 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/06/08 19:54:54 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define COLOR_X "\033[0m"
 
 typedef struct s_stack	t_stack;
+typedef struct s_stacks	t_stacks;
 
 struct s_stack
 {
@@ -39,7 +40,15 @@ struct s_stack
 	t_stack	*prev;
 };
 
-void	ft_read_args(int arc, char **argv, t_stack **A);
+struct s_stacks
+{
+	t_stack	**a;
+	int		size_a;
+	t_stack	**b;
+	int		size_b;
+};
+
+void	ft_read_args(int argc, char **argv, t_stacks *stacks);
 void	ft_print_stack(t_stack **stack);
 t_stack	*ft_add_new(int value_init, t_stack **head);
 t_stack	*ft_add_back(t_stack **stack, t_stack *new);
@@ -52,20 +61,20 @@ void	ft_swap(t_stack **A, t_stack **B);
 void	ft_move(t_stack **SRC, t_stack **DST);
 void	ft_switch(t_stack **S);
 
-int		ft_sa(t_stack **a);
-int		ft_sb(t_stack **b);
-int		ft_ss(t_stack **a, t_stack **b);
-int		ft_pa(t_stack **a, t_stack **b);
-int		ft_pb(t_stack **a, t_stack **b);
-int		ft_ra(t_stack **a);
-int		ft_rb(t_stack **b);
-int		ft_rr(t_stack **a, t_stack **b);
-int		ft_rra(t_stack **a);
-int		ft_rrb(t_stack **b);
-int		ft_rrr(t_stack **a, t_stack **b);
+int		ft_sa(t_stacks *stacks);
+int		ft_sb(t_stacks *stacks);
+int		ft_ss(t_stacks *stacks);
+int		ft_pa(t_stacks *stacks);
+int		ft_pb(t_stacks *stacks);
+int		ft_ra(t_stacks *stacks);
+int		ft_rb(t_stacks *stacks);
+int		ft_rr(t_stacks *stacks);
+int		ft_rra(t_stacks *stacks);
+int		ft_rrb(t_stacks *stacks);
+int		ft_rrr(t_stacks *stacks);
 
 int		ft_check_input(t_stack **stack);
-int		ft_solve(t_stack **a, t_stack **b);
+int		ft_solve(t_stacks *stacks);
 
 int		ft_print(char *str);
 int		ft_num2n(int num, int n);
@@ -73,6 +82,6 @@ int		ft_num3n(int num, int n);
 
 ssize_t	*error_status(void);
 void	set_error(ssize_t error);
-void	ft_exit_error(char *message, t_stack **a, t_stack **b);
+void	ft_exit_error(char *message, t_stacks *stacks);
 
 #endif

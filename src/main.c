@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:34:48 by psmolin           #+#    #+#             */
-/*   Updated: 2025/06/06 14:16:03 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/06/08 20:03:39 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,31 +24,25 @@ int	main(int arc, char **argv)
 {
 	t_stack	*a;
 	t_stack	*b;
+	t_stacks	stacks;
 
 	if (arc < 2)
 		return (0);
 	a = NULL;
 	b = NULL;
-	ft_read_args(arc, argv, &a);
+	stacks.a = &a;
+	stacks.b = &b;
+	stacks.size_a = 0;
+	stacks.size_b = 0;
+	ft_read_args(arc, argv, &stacks);
 	if (*error_status() != 0)
-		ft_exit_error("Invalid input", &a, &b);
-	if (ft_check_input(&a) == -1)
-		ft_exit_error("Duplicate values found", &a, &b);
-	ft_print_stack(&a);
-	ft_solve(&a, &b);
-	ft_free(&a);
-	ft_free(&b);
-	printf("%d\n", ft_num2n(5, 0));
-	printf("%d\n", ft_num2n(5, 1));
-	printf("%d\n", ft_num2n(5, 2));
-	printf("%d\n", ft_num2n(5, 3));
-	printf("%d\n", ft_num2n(5, 4));
-	printf("------------\n");
-	printf("%d\n", ft_num3n(5, 0));
-	printf("%d\n", ft_num3n(5, 1));
-	printf("%d\n", ft_num3n(5, 2));
-	printf("%d\n", ft_num3n(5, 3));
-	printf("%d\n", ft_num3n(5, 4));
+		ft_exit_error("Invalid input", &stacks);
+	if (ft_check_input(stacks.a) == -1)
+		ft_exit_error("Duplicate values found", &stacks);
+	ft_print_stack(stacks.a);
+	ft_solve(&stacks);
+	ft_free(stacks.a);
+	ft_free(stacks.b);
 	return (0);
 }
 
