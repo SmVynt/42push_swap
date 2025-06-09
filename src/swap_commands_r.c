@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 18:59:06 by psmolin           #+#    #+#             */
-/*   Updated: 2025/06/09 22:14:46 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/06/09 23:41:29 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ int	ft_ra(t_stacks *stacks)
 	if (!stacks->a || !(*stacks->a)->next)
 		return (1);
 	ft_roll_up(stacks->a);
-	// ft_print("ra\n");
-	printf("ra\n");
+	ft_print("ra\n");
 	return (0);
 }
 
@@ -27,8 +26,7 @@ int	ft_rb(t_stacks *stacks)
 	if (!stacks->b || !(*stacks->b)->next)
 		return (1);
 	ft_roll_up(stacks->b);
-	// ft_print("rb\n");
-	printf("rb\n");
+	ft_print("rb\n");
 	return (0);
 }
 
@@ -49,8 +47,7 @@ int	ft_rr(t_stacks *stacks)
 	}
 	if (done == 0)
 		return (1);
-	// ft_print("rr\n");
-	printf("rr\n");
+	ft_print("rr\n");
 	return (0);
 }
 

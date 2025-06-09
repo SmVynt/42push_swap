@@ -6,7 +6,7 @@
 #    By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 16:14:14 by psmolin           #+#    #+#              #
-#    Updated: 2025/06/08 20:17:26 by psmolin          ###   ########.fr        #
+#    Updated: 2025/06/09 23:50:29 by psmolin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRCS = \
 	$(SRCS_DIR)utils_lib.c \
 	$(SRCS_DIR)utils_lists.c \
 	$(SRCS_DIR)utils_lists2.c \
+	$(SRCS_DIR)utils_solver.c \
 	$(SRCS_DIR)utils_error.c
 OBJS = $(SRCS:.c=.o)
 #
@@ -65,6 +66,7 @@ norm:
 		$(SRCS_DIR)utils_lists.c \
 		$(SRCS_DIR)utils_lists2.c \
 		$(SRCS_DIR)utils_error.c \
+		$(SRCS_DIR)utils_solver.c \
 		$(SRCS_DIR)push_swap.h
 
 .PHONY: all clean fclean re bonus norm

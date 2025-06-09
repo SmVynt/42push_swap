@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 18:59:06 by psmolin           #+#    #+#             */
-/*   Updated: 2025/06/09 22:14:00 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/06/09 23:41:01 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ int	ft_sa(t_stacks *stacks)
 	if (!stacks->a || !(*stacks->a)->next)
 		return (1);
 	ft_switch(stacks->a);
-	//ft_print("sa\n");
-	printf("sa\n");
+	ft_print("sa\n");
 	return (0);
 }
 
@@ -27,8 +26,7 @@ int	ft_sb(t_stacks *stacks)
 	if (!stacks->b || !(*stacks->b)->next)
 		return (1);
 	ft_switch(stacks->b);
-	// ft_print("sb\n");
-	printf("sb\n");
+	ft_print("sb\n");
 	return (0);
 }
 
@@ -49,8 +47,7 @@ int	ft_ss(t_stacks *stacks)
 	}
 	if (done == 0)
 		return (1);
-	// ft_print("ss\n");
-	printf("ss\n");
+	ft_print("ss\n");
 	return (0);
 }
 
@@ -61,8 +58,7 @@ int	ft_pa(t_stacks *stacks)
 	ft_move(stacks->b, stacks->a);
 	stacks->size_a++;
 	stacks->size_b--;
-	// ft_print("pa\n");
-	printf("pa\n");
+	ft_print("pa\n");
 	return (0);
 }
 
@@ -73,8 +69,7 @@ int	ft_pb(t_stacks *stacks)
 	ft_move(stacks->a, stacks->b);
 	stacks->size_b++;
 	stacks->size_a--;
-	// ft_print("pb\n");
-	printf("pb\n");
+	ft_print("pb\n");
 	return (0);
 }
 

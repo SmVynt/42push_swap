@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:34:48 by psmolin           #+#    #+#             */
-/*   Updated: 2025/06/09 23:00:58 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/06/09 23:44:50 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	main(int arc, char **argv)
 	if (ft_check_input(stacks.a) == -1)
 		ft_exit_error("Duplicate values found", &stacks);
 	stacks.max_value = stacks.size_a - 1;
-	//ft_print_stack(stacks.a);
 	ft_solve(&stacks);
 	ft_free(stacks.a);
 	ft_free(stacks.b);

@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 21:38:54 by psmolin           #+#    #+#             */
-/*   Updated: 2025/06/09 20:37:39 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/06/10 01:01:56 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,15 @@ struct s_stacks
 	int		size_a;
 	t_stack	**b;
 	int		size_b;
-	int 	complexity;
+	int		complexity;
 	int		max_value;
 };
 
-typedef struct s_prices
+typedef struct s_prcs
 {
 	int	price_a;
 	int	price_b;
-}	t_prices;
+}	t_prcs;
 
 void	ft_read_args(int argc, char **argv, t_stacks *stacks);
 void	ft_print_stack(t_stack **stack);
@@ -85,6 +85,9 @@ int		ft_rrr(t_stacks *stacks);
 
 int		ft_check_input(t_stack **stack);
 int		ft_solve(t_stacks *stacks);
+t_prcs	ft_calculate_prices(t_stacks *stacks);
+void	ft_move_cheapest(t_stacks *stacks, t_prcs prices);
+int		ft_nearest_small(t_stacks *stacks, int val);
 
 int		ft_print(char *str);
 int		ft_num2n(int num, int n);

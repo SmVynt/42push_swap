@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:34:59 by psmolin           #+#    #+#             */
-/*   Updated: 2025/06/08 19:40:57 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/06/10 00:17:37 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,27 @@
 static int	ft_read_number(ssize_t *i, char *str)
 {
 	int			sign;
+	ssize_t		j;
 	long long	result;
 
 	sign = 1;
 	result = 0;
-	if (str[*i] == '-')
+	j = *i;
+	if (str[j] == '-')
 	{
 		sign = -1;
-		(*i)++;
+		j++;
 	}
-	if (str[*i] <= '0' || str[*i] > '9')
+	if (str[j] < '0' || str[j] > '9')
 		return (set_error(1), 0);
-	while (str[*i] >= '0' && str[*i] <= '9')
+	while (str[j] >= '0' && str[j] <= '9')
 	{
-		result = result * 10 + (str[*i] - '0') * sign;
+		result = result * 10 + (str[j] - '0') * sign;
 		if (result > INT_MAX || result < INT_MIN)
 			return (set_error(1), 0);
-		(*i)++;
+		j++;
 	}
+	*i = j;
 	return ((int)result);
 }
 
