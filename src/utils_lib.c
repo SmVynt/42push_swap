@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:35:02 by psmolin           #+#    #+#             */
-/*   Updated: 2025/06/06 14:15:32 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/06/08 20:21:12 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,3 +66,11 @@ int	ft_num3n(int num, int n)
 		num = num / 3;
 	return (num % 3);
 }
+
+// static void	print_a_b(t_stack *a, t_stack *b)
+// {
+// 	printf("A:");
+// 	ft_print_stack(&a);
+// 	printf("B:");
+// 	ft_print_stack(&b);
+// }

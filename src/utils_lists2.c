@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:35:02 by psmolin           #+#    #+#             */
-/*   Updated: 2025/06/08 12:58:27 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/06/08 20:17:43 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,5 @@ int	ft_check_input(t_stack **stack)
 		if (itmp == *stack)
 			checked = 1;
 	}
-	return (0);
-}
-
-int	ft_solve(t_stacks *stacks)
-{
-	(void)stacks;
-	printf("sorted\n");
 	return (0);
 }

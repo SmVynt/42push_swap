@@ -6,7 +6,7 @@
 #    By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 16:14:14 by psmolin           #+#    #+#              #
-#    Updated: 2025/06/08 19:55:52 by psmolin          ###   ########.fr        #
+#    Updated: 2025/06/08 20:17:26 by psmolin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS_DIR = src/
 SRCS = \
 	$(SRCS_DIR)main.c \
 	$(SRCS_DIR)initialize.c \
+	$(SRCS_DIR)solver.c \
 	$(SRCS_DIR)swap_commands.c \
 	$(SRCS_DIR)swap_commands_r.c \
 	$(SRCS_DIR)swap_commands_rr.c \
@@ -55,6 +56,7 @@ norm:
 	norminette \
 		$(SRCS_DIR)main.c \
 		$(SRCS_DIR)initialize.c \
+		$(SRCS_DIR)solver.c \
 		$(SRCS_DIR)swap_commands.c \
 		$(SRCS_DIR)swap_commands_r.c \
 		$(SRCS_DIR)swap_commands_rr.c \
