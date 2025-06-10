@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 21:38:54 by psmolin           #+#    #+#             */
-/*   Updated: 2025/06/10 14:08:48 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/06/10 15:12:32 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int		ft_solve(t_stacks *stacks);
 t_prcs	ft_calculate_prices(t_stacks *stacks);
 void	ft_move_cheapest(t_stacks *stacks, t_prcs prices);
 int		ft_nearest_small(t_stacks *stacks, int val);
+int		ft_check_sort(t_stacks *stacks);
 
 int		ft_print(char *str);
 int		ft_num2n(int num, int n);

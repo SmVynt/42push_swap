@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:35:02 by psmolin           #+#    #+#             */
-/*   Updated: 2025/06/10 01:02:30 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/06/10 15:12:07 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,23 @@ int	ft_nearest_small(t_stacks *stacks, int val)
 		back = back->prev;
 	}
 	return (1);
+}
+
+int	ft_check_sort(t_stacks *stacks)
+{
+	int		i;
+	t_stack	*cur;
+
+	cur = *stacks->a;
+	i = 0;
+	if (*stacks->b)
+		return (ft_print(COLOR_R"KO\n"COLOR_X), 1);
+	while (cur->next != *stacks->a)
+	{
+		if (cur->next->value < cur->value)
+			return (ft_print(COLOR_R"KO\n"COLOR_X), 1);
+		cur = cur->next;
+		i++;
+	}
+	return (ft_print(COLOR_G"OK\n"COLOR_X), 1);
 }
