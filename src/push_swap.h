@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 21:38:54 by psmolin           #+#    #+#             */
-/*   Updated: 2025/06/10 01:01:56 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/06/10 14:08:48 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <limits.h>
+# include "gnl/get_next_line.h"
 
 # define COLOR_R "\033[31m"
 # define COLOR_G "\033[32m"
@@ -96,5 +97,8 @@ int		ft_num3n(int num, int n);
 ssize_t	*error_status(void);
 void	set_error(ssize_t error);
 void	ft_exit_error(char *message, t_stacks *stacks);
+
+int		ft_strncmp(const char *s1, const char *s2, unsigned int n);
+int		ft_strlen(char *s);
 
 #endif

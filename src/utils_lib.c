@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:35:02 by psmolin           #+#    #+#             */
-/*   Updated: 2025/06/08 20:21:12 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/06/10 14:09:08 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,24 @@ int	ft_num3n(int num, int n)
 	return (num % 3);
 }
 
-// static void	print_a_b(t_stack *a, t_stack *b)
-// {
-// 	printf("A:");
-// 	ft_print_stack(&a);
-// 	printf("B:");
-// 	ft_print_stack(&b);
-// }
+int	ft_strncmp(const char *s1, const char *s2, unsigned int n)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (s1[i] && (s1[i] == s2[i]) && i < n)
+		i++;
+	if (i == n)
+		return (0);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
+
+int	ft_strlen(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
