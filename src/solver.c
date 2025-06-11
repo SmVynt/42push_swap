@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 20:16:32 by psmolin           #+#    #+#             */
-/*   Updated: 2025/06/10 01:01:30 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/06/11 15:24:18 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,14 @@ static void	ft_swap3(t_stacks *stacks)
 
 static void	ft_swap_dirty(t_stacks *stacks)
 {
-	int		i;
 	int		size;
 	float	k;
 	int		val_min;
 
-	i = 0;
 	k = 0.8f;
 	size = stacks->size_a;
-	while (stacks->size_a > 3 && i < 10000)
+	while (stacks->size_a > 3)
 	{
-		i++;
 		val_min = size - (int)((float)(stacks->size_a) * k);
 		if (val_min > size - 3)
 			val_min = size - 3;
