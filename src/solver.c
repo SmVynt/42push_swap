@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 20:16:32 by psmolin           #+#    #+#             */
-/*   Updated: 2025/06/10 01:01:30 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/06/12 06:09:21 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ static void	ft_fix(t_stacks *stacks)
 
 int	ft_solve(t_stacks *stacks)
 {
+	if (is_sorted(stacks))
+		return (0);
 	if (stacks->size_a <= 3)
 	{
 		ft_swap3(stacks);
