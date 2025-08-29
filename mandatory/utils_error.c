@@ -6,11 +6,11 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:35:05 by psmolin           #+#    #+#             */
-/*   Updated: 2025/06/08 13:41:09 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/07/07 19:57:16 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "philosophers.h"
 
 /**
 * @brief Function that sets error status.
@@ -32,12 +32,18 @@ ssize_t	*error_status(void)
 	return (&status);
 }
 
-void	ft_exit_error(char *message, t_stacks *stacks)
+void	ft_free_data(t_data *data)
 {
-	ft_free(stacks->a);
-	ft_free(stacks->b);
-	ft_print(COLOR_R "Error\n" COLOR_Y);
-	ft_print(message);
-	ft_print("\n" COLOR_X);
-	exit(1);
+	if (data->philos)
+		free(data->philos);
+	if (data->forks)
+		free(data->forks);
+}
+
+void	ft_exit_error(char *message, t_data *data)
+{
+	printf(COLOR_R "Error\n" COLOR_Y);
+	printf("%s\n" COLOR_X, message);
+	ft_free_data(data);
+	exit (EXIT_FAILURE);
 }

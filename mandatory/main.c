@@ -1,39 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:34:48 by psmolin           #+#    #+#             */
-/*   Updated: 2025/06/10 13:39:18 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/07/09 14:44:10 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "philosophers.h"
 
-int	main(int arc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_stack		*a;
-	t_stack		*b;
-	t_stacks	stacks;
+	t_data	data;
 
-	if (arc < 2)
-		return (0);
-	a = NULL;
-	b = NULL;
-	stacks.a = &a;
-	stacks.b = &b;
-	stacks.size_a = 0;
-	stacks.size_b = 0;
-	ft_read_args(arc, argv, &stacks);
-	if (*error_status() != 0)
-		ft_exit_error("Invalid input", &stacks);
-	if (ft_check_input(stacks.a) == -1)
-		ft_exit_error("Duplicate values found", &stacks);
-	stacks.max_value = stacks.size_a - 1;
-	ft_solve(&stacks);
-	ft_free(stacks.a);
-	ft_free(stacks.b);
+	ft_initialize(argc, argv, &data);
+	ft_start_threads(&data);
+	ft_join_threads(&data);
+	ft_cleanup(&data);
+	ft_free_data(&data);
 	return (0);
 }
