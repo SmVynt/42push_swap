@@ -6,12 +6,20 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:34:59 by psmolin           #+#    #+#             */
-/*   Updated: 2025/07/09 14:54:46 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/08/29 13:57:56 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
+/**
+ * @brief Function that reads a number from a string.
+ *
+ * This function reads a number from the given string and returns it.
+ * If the string is not a valid number, it returns -1.
+ * @param str The string to read the number from.
+ * @return The read number, or -1 on error.
+ */
 static int	ft_read_number(char *str)
 {
 	long long	num;
@@ -40,11 +48,20 @@ static int	ft_read_number(char *str)
 	return ((int)num);
 }
 
+/**
+ * @brief Function that reads and validates command line arguments.
+ * This function reads the command line arguments and validates them.
+ * If any argument is invalid, it calls ft_exit_error to print an error
+ * message and exit the program.
+ * @param argc The number of command line arguments.
+ * @param argv The command line arguments.
+ * @param data The data structure to store the read values.
+ */
 static void	ft_read_args(int argc, char **argv, t_data *data)
 {
 	if (argc < 5 || argc > 6)
 		ft_exit_error("Invalid number of arguments. Expected \
-			4 or 5 arguments.", data);
+4 or 5 arguments.", data);
 	data->philos_count = ft_read_number(argv[1]);
 	if (data->philos_count < 1)
 		ft_exit_error("Number of philosophers must be at least 1.", data);
@@ -62,9 +79,19 @@ static void	ft_read_args(int argc, char **argv, t_data *data)
 		data->to_eat = ft_read_number(argv[5]);
 	if (argc == 6 && data->to_eat < 1)
 		ft_exit_error("Number of times each philosopher must eat \
-			must be a positive integer", data);
+must be a positive integer.", data);
 }
 
+/**
+ * @brief Function that initializes the data structure.
+ * This function initializes the data structure by reading the command line
+ * arguments and allocating memory for the philosophers and forks.
+ * If any allocation fails, it calls ft_exit_error to print an error message
+ * and exit the program.
+ * @param argc The number of command line arguments.
+ * @param argv The command line arguments.
+ * @param data The data structure to initialize.
+ */
 static void	ft_init_data(int argc, char **argv, t_data *data)
 {
 	data->philos = NULL;
@@ -77,9 +104,17 @@ static void	ft_init_data(int argc, char **argv, t_data *data)
 	if (data->ttt < 0)
 		data->ttt = 0;
 	if (!data->forks || !data->philos)
-		ft_exit_error("Malloc failed", data);
+		ft_exit_error("Malloc failed.", data);
 }
 
+/**
+ * @brief Function that initializes the philosophers and forks.
+ * This function initializes the philosophers and forks by setting their
+ * initial values and initializing the mutexes.
+ * @param argc The number of command line arguments.
+ * @param argv The command line arguments.
+ * @param data The data structure to initialize.
+ */
 void	ft_initialize(int argc, char **argv, t_data *data)
 {
 	int	i;

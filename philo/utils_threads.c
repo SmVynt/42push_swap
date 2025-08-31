@@ -6,13 +6,13 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:34:48 by psmolin           #+#    #+#             */
-/*   Updated: 2025/07/09 14:36:49 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/08/29 13:52:16 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-static void	*ft_think(void *argument)
+static void	*ft_live(void *argument)
 {
 	t_philo	*philo;
 
@@ -22,9 +22,10 @@ static void	*ft_think(void *argument)
 	while (1)
 	{
 		if (ft_someone_died(philo->data) == 1)
-			break;
+			break ;
 		pthread_mutex_lock(&philo->fork_1);
 		pthread_mutex_lock(&philo->fork_2);
+		ft_print_ts(philo->data, "has taken a fork", philo->id, COLOR_CYAN);
 		ft_print_ts(philo->data, "is eating", philo->id, COLOR_GREEN);
 		pthread_mutex_lock(&philo->lm_mutex);
 		philo->last_meal = ft_get_time() - philo->data->start;
@@ -33,15 +34,15 @@ static void	*ft_think(void *argument)
 		pthread_mutex_unlock(&philo->fork_1);
 		pthread_mutex_unlock(&philo->fork_2);
 		if (ft_someone_died(philo->data) == 1)
-			break;
+			break ;
 		ft_print_ts(philo->data, "is sleeping", philo->id, COLOR_WHITE);
 		ft_sleep(philo->data->tts);
 		if (ft_someone_died(philo->data) == 1)
-			break;
+			break ;
 		ft_print_ts(philo->data, "is thinking", philo->id, COLOR_YELLOW);
 		ft_sleep(philo->data->ttt);
 	}
-	return(NULL);
+	return (NULL);
 }
 
 static void	*ft_doctor(void *argument)
@@ -81,7 +82,7 @@ void	ft_start_threads(t_data *data)
 	data->start = ft_get_time();
 	while (i < data->philos_count)
 	{
-		pthread_create(&data->philos[i].thread, NULL, ft_think, &data->philos[i]);
+		pthread_create(&data->philos[i].thread, NULL, ft_live, &data->philos[i]);
 		i++;
 	}
 	pthread_create(&data->doctor, NULL, ft_doctor, data);

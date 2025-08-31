@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:35:05 by psmolin           #+#    #+#             */
-/*   Updated: 2025/07/07 19:57:16 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/08/29 13:58:06 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ ssize_t	*error_status(void)
 	return (&status);
 }
 
+/**
+ * @brief Function that frees allocated memory in the data structure.
+ */
 void	ft_free_data(t_data *data)
 {
 	if (data->philos)
@@ -40,6 +43,10 @@ void	ft_free_data(t_data *data)
 		free(data->forks);
 }
 
+/**
+ * @brief Function that prints an error message, frees allocated memory,
+ * and exits the program.
+ */
 void	ft_exit_error(char *message, t_data *data)
 {
 	printf(COLOR_R "Error\n" COLOR_Y);

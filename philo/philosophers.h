@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 21:38:54 by psmolin           #+#    #+#             */
-/*   Updated: 2025/07/09 14:52:17 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/08/29 13:34:29 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define COLOR_YELLOW	1
 # define COLOR_RED		2
 # define COLOR_WHITE	3
+# define COLOR_CYAN		4
 
 # define DOCTOR_WAIT 5000
 # define THRESHOLD 10

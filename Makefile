@@ -6,13 +6,13 @@
 #    By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 16:14:14 by psmolin           #+#    #+#              #
-#    Updated: 2025/07/09 14:39:47 by psmolin          ###   ########.fr        #
+#    Updated: 2025/08/29 14:00:05 by psmolin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME = philosophers
-SRCS_DIR = mandatory/
+SRCS_DIR = philo/
 HEADERS = $(SRCS_DIR)philosophers.h
 CC = cc
 RM = rm -f

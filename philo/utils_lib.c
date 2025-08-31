@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:35:02 by psmolin           #+#    #+#             */
-/*   Updated: 2025/07/09 14:41:35 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/08/29 13:39:28 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	ft_print_ts(t_data *data, char *msg, int id, int color)
 		printf(COLOR_R);
 	else if (color == COLOR_WHITE)
 		printf(COLOR_W);
+	else if (color == COLOR_CYAN)
+		printf(COLOR_C);
 	else
 		printf(COLOR_X);
 	printf("%ld %d %s\n" COLOR_X, cur_time, id, msg);
@@ -54,20 +56,20 @@ int	ft_someone_died(t_data *data)
 	return (ret);
 }
 
+// long	ft_get_time(void)
+// {
+// 	struct timeval	tv;
+
+// 	if (gettimeofday(&tv, NULL) == -1)
+// 		return (set_error(1), 0);
+// 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+// }
+
 long	ft_get_time(void)
 {
-	struct timeval	tv;
+	struct timespec	ts;
 
-	if (gettimeofday(&tv, NULL) == -1)
+	if (clock_gettime(CLOCK_MONOTONIC, &ts) == -1)
 		return (set_error(1), 0);
-	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+	return (ts.tv_sec * 1000 + ts.tv_nsec / 1000000);
 }
-
-// long	ft_get_time_better(void)
-// {
-// 	struct timespec	ts;
-
-// 	if (clock_gettime(CLOCK_MONOTONIC, &ts) == -1)
-// 		return (set_error(1), 0);
-// 	return (ts.tv_sec * 1000 + ts.tv_nsec / 1000000);
-// }
