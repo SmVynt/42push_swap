@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:35:02 by psmolin           #+#    #+#             */
-/*   Updated: 2025/08/29 13:39:28 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/08/31 13:58:08 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ void	ft_print_ts(t_data *data, char *msg, int id, int color)
 	pthread_mutex_unlock(&data->mutex);
 }
 
-int	ft_someone_died(t_data *data)
+int	ft_isfinished(t_data *data)
 {
 	int	ret;
 
 	ret = 0;
 	pthread_mutex_lock(&data->mutex);
-	if (data->someone_died == 1)
+	if (data->finished == 1)
 		ret = 1;
 	pthread_mutex_unlock(&data->mutex);
 	return (ret);

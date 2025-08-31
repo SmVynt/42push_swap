@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:34:59 by psmolin           #+#    #+#             */
-/*   Updated: 2025/08/29 13:57:56 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/08/31 14:07:16 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,19 +65,19 @@ static void	ft_read_args(int argc, char **argv, t_data *data)
 	data->philos_count = ft_read_number(argv[1]);
 	if (data->philos_count < 1)
 		ft_exit_error("Number of philosophers must be at least 1.", data);
-	data->ttd = ft_read_number(argv[2]);
-	if (data->ttd < 1)
+	data->ttdie = ft_read_number(argv[2]);
+	if (data->ttdie < 1)
 		ft_exit_error("Time to die must be a positive integer.", data);
-	data->tte = ft_read_number(argv[3]);
-	if (data->tte < 1)
+	data->tteat = ft_read_number(argv[3]);
+	if (data->tteat < 1)
 		ft_exit_error("Time to eat must be a positive integer.", data);
-	data->tts = ft_read_number(argv[4]);
-	if (data->tts < 1)
+	data->ttsleep = ft_read_number(argv[4]);
+	if (data->ttsleep < 1)
 		ft_exit_error("Time to sleep must be a positive integer.", data);
-	data->to_eat = -1;
+	data->times_must_eat = -1;
 	if (argc == 6)
-		data->to_eat = ft_read_number(argv[5]);
-	if (argc == 6 && data->to_eat < 1)
+		data->times_must_eat = ft_read_number(argv[5]);
+	if (argc == 6 && data->times_must_eat < 1)
 		ft_exit_error("Number of times each philosopher must eat \
 must be a positive integer.", data);
 }
@@ -97,12 +97,12 @@ static void	ft_init_data(int argc, char **argv, t_data *data)
 	data->philos = NULL;
 	data->forks = NULL;
 	ft_read_args(argc, argv, data);
-	data->someone_died = 0;
+	data->finished = 0;
 	data->philos = malloc(sizeof(t_philo) * data->philos_count);
 	data->forks = malloc(sizeof(t_mutex) * data->philos_count);
-	data->ttt = data->ttd - (data->tte + data->tts + THRESHOLD);
-	if (data->ttt < 0)
-		data->ttt = 0;
+	data->ttthink = data->ttdie - (data->tteat + data->ttsleep + THRESHOLD);
+	if (data->ttthink < 0)
+		data->ttthink = 0;
 	if (!data->forks || !data->philos)
 		ft_exit_error("Malloc failed.", data);
 }
@@ -128,12 +128,15 @@ void	ft_initialize(int argc, char **argv, t_data *data)
 	while (i < data->philos_count)
 	{
 		data->philos[i].id = i + 1;
-		data->philos[i].last_meal = 0;
+		data->philos[i].last_meal_time = 0;
 		data->philos[i].fork_1 = data->forks[i];
 		data->philos[i].fork_2 = data->forks[(i + 1) % data->philos_count];
-		data->philos[i].meals_count = 0;
+		data->philos[i].meals_needed = data->times_must_eat;
+		data->philos[i].meals_had = 0;
+		data->philos[i].finished_eating = 0;
 		data->philos[i].data = data;
 		pthread_mutex_init(&data->philos[i].lm_mutex, NULL);
+		pthread_mutex_init(&data->philos[i].fe_mutex, NULL);
 		i++;
 	}
 }

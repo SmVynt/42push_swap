@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:34:48 by psmolin           #+#    #+#             */
-/*   Updated: 2025/08/29 13:52:16 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/08/31 16:08:24 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,29 +18,35 @@ static void	*ft_live(void *argument)
 
 	philo = (t_philo *)argument;
 	if (philo->id % 2 == 0)
-		ft_sleep(philo->data->tte);
-	while (1)
+		ft_sleep(philo->data->tteat);
+	while (ft_isfinished(philo->data) == 0)
 	{
-		if (ft_someone_died(philo->data) == 1)
-			break ;
 		pthread_mutex_lock(&philo->fork_1);
 		pthread_mutex_lock(&philo->fork_2);
 		ft_print_ts(philo->data, "has taken a fork", philo->id, COLOR_CYAN);
 		ft_print_ts(philo->data, "is eating", philo->id, COLOR_GREEN);
 		pthread_mutex_lock(&philo->lm_mutex);
-		philo->last_meal = ft_get_time() - philo->data->start;
+		philo->last_meal_time = ft_get_time() - philo->data->start;
 		pthread_mutex_unlock(&philo->lm_mutex);
-		ft_sleep(philo->data->tte);
+		ft_sleep(philo->data->tteat);
 		pthread_mutex_unlock(&philo->fork_1);
 		pthread_mutex_unlock(&philo->fork_2);
-		if (ft_someone_died(philo->data) == 1)
+		if (philo->meals_needed != -1)
+		{
+			pthread_mutex_lock(&philo->fe_mutex);
+			philo->meals_had++;
+			if (philo->meals_had >= philo->meals_needed)
+				philo->finished_eating = 1;
+			pthread_mutex_unlock(&philo->fe_mutex);
+		}
+		if (ft_isfinished(philo->data) == 1)
 			break ;
 		ft_print_ts(philo->data, "is sleeping", philo->id, COLOR_WHITE);
-		ft_sleep(philo->data->tts);
-		if (ft_someone_died(philo->data) == 1)
+		ft_sleep(philo->data->ttsleep);
+		if (ft_isfinished(philo->data) == 1)
 			break ;
 		ft_print_ts(philo->data, "is thinking", philo->id, COLOR_YELLOW);
-		ft_sleep(philo->data->ttt);
+		ft_sleep(philo->data->ttthink);
 	}
 	return (NULL);
 }
@@ -53,23 +59,58 @@ static void	*ft_doctor(void *argument)
 	int		i;
 
 	data = (t_data *)argument;
-	while (data->someone_died == 0)
+	while (ft_isfinished(data) == 0)
 	{
 		cur_time = ft_get_time() - data->start;
 		i = 0;
 		while (i < data->philos_count)
 		{
 			pthread_mutex_lock(&data->philos[i].lm_mutex);
-			last_meal = data->philos[i].last_meal;
+			last_meal = data->philos[i].last_meal_time;
 			pthread_mutex_unlock(&data->philos[i].lm_mutex);
-			if (cur_time - last_meal > data->ttd)
+			if (cur_time - last_meal > data->ttdie)
 			{
-				data->someone_died = 1;
-				printf(COLOR_R"%ld %d died\n"COLOR_X, cur_time, data->philos[i].id);
+				pthread_mutex_lock(&data->mutex);
+				data->finished = 1;
+				pthread_mutex_unlock(&data->mutex);
+				ft_print_ts(data, "died", data->philos[i].id, COLOR_RED);
+				return (NULL);
 			}
 			i++;
 		}
 		usleep(DOCTOR_WAIT);
+	}
+	return (NULL);
+}
+
+static void	*ft_waiter(void *argument)
+{
+	t_data	*data;
+	long	finished_eating;
+	int		i;
+
+	data = (t_data *)argument;
+	while (ft_isfinished(data) == 0)
+	{
+		i = 0;
+		finished_eating = 1;
+		while (i < data->philos_count)
+		{
+			pthread_mutex_lock(&data->philos[i].fe_mutex);
+			if (data->philos[i].finished_eating == 0)
+				finished_eating = 0;
+			pthread_mutex_unlock(&data->philos[i].fe_mutex);
+			i++;
+		}
+		if (finished_eating == 1)
+		{
+			printf(COLOR_R"All philosophers have eaten required meals\n"COLOR_X);
+			pthread_mutex_lock(&data->mutex);
+			data->finished = 1;
+			pthread_mutex_unlock(&data->mutex);
+			return (NULL);
+		}
+		usleep(WAITER_WAIT);
 	}
 	return (NULL);
 }
@@ -86,6 +127,8 @@ void	ft_start_threads(t_data *data)
 		i++;
 	}
 	pthread_create(&data->doctor, NULL, ft_doctor, data);
+	if (data->times_must_eat != -1)
+		pthread_create(&data->waiter, NULL, ft_waiter, data);
 }
 
 void	ft_join_threads(t_data *data)
@@ -99,6 +142,8 @@ void	ft_join_threads(t_data *data)
 		i++;
 	}
 	pthread_join(data->doctor, NULL);
+	if (data->times_must_eat != -1)
+		pthread_join(data->waiter, NULL);
 }
 
 void	ft_cleanup(t_data *data)
@@ -109,6 +154,7 @@ void	ft_cleanup(t_data *data)
 	while (i < data->philos_count)
 	{
 		pthread_mutex_destroy(&data->philos[i].lm_mutex);
+		pthread_mutex_destroy(&data->philos[i].fe_mutex);
 		pthread_mutex_destroy(&data->forks[i]);
 		i++;
 	}
