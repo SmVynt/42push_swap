@@ -12,6 +12,8 @@
 
 #include "philosophers_bonus.h"
 
+hi
+
 int	main(int argc, char **argv)
 {
 	t_data	*data;
