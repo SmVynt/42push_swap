@@ -6,13 +6,11 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:34:48 by psmolin           #+#    #+#             */
-/*   Updated: 2025/08/31 18:47:44 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/09/03 13:56:49 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers_bonus.h"
-
-hi
 
 int	main(int argc, char **argv)
 {

@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:34:48 by psmolin           #+#    #+#             */
-/*   Updated: 2025/08/31 19:29:07 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/09/03 13:58:51 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	ft_cleanup(t_data *data)
 	// int	i;
 
 	// i = 0;
+	(void)data;
 	sem_unlink("/forks");
 	sem_unlink("/print");
 	sem_unlink("/finished");

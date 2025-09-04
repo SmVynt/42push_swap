@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:35:05 by psmolin           #+#    #+#             */
-/*   Updated: 2025/08/31 18:47:15 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/09/03 13:59:39 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	ft_free_data(void)
  */
 void	ft_exit_error(char *message, t_data *data)
 {
+	(void)data;
 	printf(COLOR_R "Error\n" COLOR_Y);
 	printf("%s\n" COLOR_X, message);
 	ft_free_data();

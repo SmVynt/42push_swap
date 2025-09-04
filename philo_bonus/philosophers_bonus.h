@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 21:38:54 by psmolin           #+#    #+#             */
-/*   Updated: 2025/08/31 19:27:09 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/09/04 12:21:37 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	ft_sleep(int time);
 long	ft_get_time(void);
 void	ft_print_ts(t_data *data, char *msg, int id, int color);
 
+int		ft_calculate_init_wait(int ph_c, int id, t_data *data);
 t_data	*ft_get_data(void);
 void	ft_free_data(void);
 void	ft_exit_error(char *message, t_data *data);

@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:34:59 by psmolin           #+#    #+#             */
-/*   Updated: 2025/08/31 14:07:16 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/09/04 13:39:52 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ static void	ft_read_args(int argc, char **argv, t_data *data)
 	if (argc < 5 || argc > 6)
 		ft_exit_error("Invalid number of arguments. Expected \
 4 or 5 arguments.", data);
-	data->philos_count = ft_read_number(argv[1]);
-	if (data->philos_count < 1)
+	data->ph_c = ft_read_number(argv[1]);
+	if (data->ph_c < 1)
 		ft_exit_error("Number of philosophers must be at least 1.", data);
 	data->ttdie = ft_read_number(argv[2]);
 	if (data->ttdie < 1)
@@ -98,8 +98,8 @@ static void	ft_init_data(int argc, char **argv, t_data *data)
 	data->forks = NULL;
 	ft_read_args(argc, argv, data);
 	data->finished = 0;
-	data->philos = malloc(sizeof(t_philo) * data->philos_count);
-	data->forks = malloc(sizeof(t_mutex) * data->philos_count);
+	data->philos = malloc(sizeof(t_philo) * data->ph_c);
+	data->forks = malloc(sizeof(t_mutex) * data->ph_c);
 	data->ttthink = data->ttdie - (data->tteat + data->ttsleep + THRESHOLD);
 	if (data->ttthink < 0)
 		data->ttthink = 0;
@@ -122,21 +122,21 @@ void	ft_initialize(int argc, char **argv, t_data *data)
 	ft_init_data(argc, argv, data);
 	pthread_mutex_init(&data->mutex, NULL);
 	i = 0;
-	while (i < data->philos_count)
+	while (i < data->ph_c)
 		pthread_mutex_init(&data->forks[i++], NULL);
-	i = 0;
-	while (i < data->philos_count)
+	i = -1;
+	while (++i < data->ph_c)
 	{
 		data->philos[i].id = i + 1;
-		data->philos[i].last_meal_time = 0;
-		data->philos[i].fork_1 = data->forks[i];
-		data->philos[i].fork_2 = data->forks[(i + 1) % data->philos_count];
-		data->philos[i].meals_needed = data->times_must_eat;
+		data->philos[i].fork_1 = &data->forks[i];
+		data->philos[i].fork_2 = &data->forks[(i + 1) % data->ph_c];
+		data->philos[i].data = data;
 		data->philos[i].meals_had = 0;
 		data->philos[i].finished_eating = 0;
-		data->philos[i].data = data;
+		data->philos[i].meals_needed = data->times_must_eat;
+		data->philos[i].last_meal_time = 0;
+		data->philos[i].time_to_wait = ft_calc_init_wait(data->ph_c, i, data);
 		pthread_mutex_init(&data->philos[i].lm_mutex, NULL);
 		pthread_mutex_init(&data->philos[i].fe_mutex, NULL);
-		i++;
 	}
 }

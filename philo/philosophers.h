@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 21:38:54 by psmolin           #+#    #+#             */
-/*   Updated: 2025/08/31 15:58:45 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/09/04 13:42:34 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <limits.h>
 # include <pthread.h>
 # include <sys/time.h>
-// # include <linux/time.h>
 
 # define COLOR_R "\033[31m"
 # define COLOR_G "\033[32m"
@@ -36,8 +35,8 @@
 # define COLOR_WHITE	3
 # define COLOR_CYAN		4
 
-# define DOCTOR_WAIT 5000
-# define WAITER_WAIT 5000
+# define DOCTOR_WAIT 500
+# define WAITER_WAIT 500
 # define THRESHOLD 10
 
 typedef pthread_t		t_pth;
@@ -52,16 +51,17 @@ typedef struct s_philo
 	int		meals_had;
 	int		meals_needed;
 	int		finished_eating;
+	int		time_to_wait;
 	t_mutex	fe_mutex;
 	t_pth	thread;
-	t_mutex	fork_1;
-	t_mutex	fork_2;
+	t_mutex	*fork_1;
+	t_mutex	*fork_2;
 	t_data	*data;
 }	t_philo;
 
 struct s_data
 {
-	int		philos_count;
+	int		ph_c;
 	t_philo	*philos;
 	t_mutex	*forks;
 	int		ttdie;
@@ -80,6 +80,7 @@ struct s_data
 void	ft_initialize(int argc, char **argv, t_data *data);
 void	ft_start_threads(t_data *data);
 void	ft_join_threads(t_data *data);
+void	*ft_live(void *argument);
 void	ft_cleanup(t_data *data);
 
 void	ft_sleep(int time);
@@ -87,9 +88,10 @@ long	ft_get_time(void);
 void	ft_print_ts(t_data *data, char *msg, int id, int color);
 int		ft_isfinished(t_data *data);
 
-ssize_t	*error_status(void);
+int		ft_calc_init_wait(int ph_c, int id, t_data *data);
+void	ft_kill_philo(t_data *data, int i);
+void	ft_finish_eating(t_data *data);
 void	ft_free_data(t_data *data);
-void	set_error(ssize_t error);
 void	ft_exit_error(char *message, t_data *data);
 
 #endif
