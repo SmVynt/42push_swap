@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_bonus.c                                       :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:34:48 by psmolin           #+#    #+#             */
-/*   Updated: 2025/09/03 13:56:49 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/09/08 13:51:19 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	main(int argc, char **argv)
 {
-	t_data	*data;
+	t_data	data;
 
-	data = ft_get_data();
-	ft_initialize(argc, argv, data);
-	ft_cleanup(data);
-	ft_free_data();
+	ft_initialize(argc, argv, &data);
+	ft_start_processes(&data);
+	ft_wait_processes(&data);
+	ft_free_data(&data);
 	return (0);
 }

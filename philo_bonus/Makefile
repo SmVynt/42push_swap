@@ -6,7 +6,7 @@
 #    By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 16:14:14 by psmolin           #+#    #+#              #
-#    Updated: 2025/09/03 14:00:00 by psmolin          ###   ########.fr        #
+#    Updated: 2025/09/08 13:52:50 by psmolin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,12 @@ MK = make -C
 
 #
 SRCS = \
-	main_bonus.c \
-	utils_init_bonus.c \
-	utils_lib_bonus.c \
-	utils_philo_bonus.c \
-	utils_utils_bonus.c
+	main.c \
+	utils_extra.c \
+	utils_init.c \
+	utils_lib.c \
+	utils_philos.c \
+	utils_processes.c
 OBJS = $(SRCS:.c=.o)
 
 #

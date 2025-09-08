@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:35:02 by psmolin           #+#    #+#             */
-/*   Updated: 2025/09/04 12:04:06 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/09/08 13:46:22 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_sleep(int time)
 
 	start = ft_get_time();
 	while (ft_get_time() - start < time)
-		usleep(500);
+		usleep(USLEEP_TIME);
 }
 
 /**

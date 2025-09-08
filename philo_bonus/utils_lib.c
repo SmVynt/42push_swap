@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_lib_bonus.c                                  :+:      :+:    :+:   */
+/*   utils_lib.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:35:02 by psmolin           #+#    #+#             */
-/*   Updated: 2025/08/31 19:19:01 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/09/08 15:07:13 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers_bonus.h"
-#include <time.h>
 
+/**
+ * Sleep for a specified amount of time in milliseconds.
+ */
 void	ft_sleep(int time)
 {
 	long	start;
@@ -22,6 +24,9 @@ void	ft_sleep(int time)
 		usleep(500);
 }
 
+/**
+ * Print a timestamped message using semaphore for synchronization.
+ */
 void	ft_print_ts(t_data *data, char *msg, int id, int color)
 {
 	long	cur_time;
@@ -44,32 +49,29 @@ void	ft_print_ts(t_data *data, char *msg, int id, int color)
 	sem_post(data->print);
 }
 
-int	ft_isfinished(t_data *data)
-{
-	int	ret;
-
-	ret = 0;
-	sem_wait(data->finished);
-	if (data->is_finished == 1)
-		ret = 1;
-	sem_post(data->finished);
-	return (ret);
-}
-
-// long	ft_get_time(void)
+/**
+ * Check if the simulation is finished.
+ */
+// int	ft_isfinished(t_data *data)
 // {
-// 	struct timeval	tv;
+// 	int	ret;
 
-// 	if (gettimeofday(&tv, NULL) == -1)
-// 		return (set_error(1), 0);
-// 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+// 	ret = 0;
+// 	pthread_mutex_lock(&data->mutex);
+// 	if (data->finished == 1)
+// 		ret = 1;
+// 	pthread_mutex_unlock(&data->mutex);
+// 	return (ret);
 // }
 
+/**
+ * Get the current time in milliseconds.
+ */
 long	ft_get_time(void)
 {
-	struct timespec	ts;
+	struct timeval	tv;
 
-	if (clock_gettime(CLOCK_MONOTONIC, &ts) == -1)
+	if (gettimeofday(&tv, NULL) == -1)
 		return (0);
-	return (ts.tv_sec * 1000 + ts.tv_nsec / 1000000);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }

@@ -6,11 +6,11 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:35:05 by psmolin           #+#    #+#             */
-/*   Updated: 2025/09/08 13:46:07 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/09/08 14:41:47 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philosophers_bonus.h"
 
 int	ft_calc_init_wait(int ph_c, int id, t_data *data)
 {
@@ -30,31 +30,80 @@ int	ft_calc_init_wait(int ph_c, int id, t_data *data)
 	return ((id * (data->tteat + delta_time)) % data->ttdie);
 }
 
-void	ft_kill_philo(t_data *data, int i)
+/**
+ * @brief Clean exit function for child processes
+ */
+void	ft_clean_exit(t_data *data, int exit_code)
 {
-	pthread_mutex_lock(&data->mutex);
-	data->finished = 1;
-	pthread_mutex_unlock(&data->mutex);
-	ft_print_ts(data, "died", data->philos[i].id, COLOR_RED);
-}
-
-void	ft_finish_eating(t_data *data)
-{
-	pthread_mutex_lock(&data->mutex);
-	printf(COLOR_G"All philosophers have eaten required meals\n"COLOR_X);
-	data->finished = 1;
-	pthread_mutex_unlock(&data->mutex);
+	if (data)
+	{
+		if (data->forks)
+			sem_close(data->forks);
+		if (data->print)
+			sem_close(data->print);
+		if (data->finished)
+			sem_close(data->finished);
+		if (data->death)
+			sem_close(data->death);
+		if (data->pids)
+			free(data->pids);
+	}
+	exit(exit_code);
 }
 
 /**
- * @brief Function that frees allocated memory in the data structure.
+ * @brief Signal handler for clean exit
+ */
+void	signal_handler(int sig)
+{
+	sem_t	*forks;
+	sem_t	*print;
+	sem_t	*finished;
+	sem_t	*death;
+
+	(void)sig;
+	forks = sem_open("/philo_forks", 0);
+	if (forks != SEM_FAILED)
+		sem_close(forks);
+	print = sem_open("/philo_print", 0);
+	if (print != SEM_FAILED)
+		sem_close(print);
+	finished = sem_open("/philo_finished", 0);
+	if (finished != SEM_FAILED)
+		sem_close(finished);
+	death = sem_open("/philo_death", 0);
+	if (death != SEM_FAILED)
+		sem_close(death);
+	exit(0);
+}
+
+/**
+ * @brief Cleanup semaphores and resources
  */
 void	ft_free_data(t_data *data)
 {
-	if (data->philos)
-		free(data->philos);
 	if (data->forks)
-		free(data->forks);
+	{
+		sem_close(data->forks);
+		sem_unlink("/philo_forks");
+	}
+	if (data->print)
+	{
+		sem_close(data->print);
+		sem_unlink("/philo_print");
+	}
+	if (data->finished)
+	{
+		sem_close(data->finished);
+		sem_unlink("/philo_finished");
+	}
+	if (data->death)
+	{
+		sem_close(data->death);
+		sem_unlink("/philo_death");
+	}
+	if (data->pids)
+		free(data->pids);
 }
 
 /**

@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 21:38:54 by psmolin           #+#    #+#             */
-/*   Updated: 2025/09/04 13:42:34 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/09/08 13:45:54 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 
 # define DOCTOR_WAIT 500
 # define WAITER_WAIT 500
+# define USLEEP_TIME 500
 # define THRESHOLD 10
 
 typedef pthread_t		t_pth;

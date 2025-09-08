@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_init_bonus.c                                 :+:      :+:    :+:   */
+/*   utils_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:34:59 by psmolin           #+#    #+#             */
-/*   Updated: 2025/08/31 18:51:06 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/09/08 13:31:34 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ static void	ft_read_args(int argc, char **argv, t_data *data)
 	if (argc < 5 || argc > 6)
 		ft_exit_error("Invalid number of arguments. Expected \
 4 or 5 arguments.", data);
-	data->philos_count = ft_read_number(argv[1]);
-	if (data->philos_count < 1)
+	data->ph_c = ft_read_number(argv[1]);
+	if (data->ph_c < 1)
 		ft_exit_error("Number of philosophers must be at least 1.", data);
 	data->ttdie = ft_read_number(argv[2]);
 	if (data->ttdie < 1)
@@ -94,140 +94,38 @@ must be a positive integer.", data);
  */
 static void	ft_init_data(int argc, char **argv, t_data *data)
 {
+	data->pids = NULL;
 	data->forks = NULL;
+	data->print = NULL;
+	data->finished = NULL;
+	data->death = NULL;
 	ft_read_args(argc, argv, data);
-	data->finished = 0;
-	if (data->philos_count > MAX_PHILOS)
-		ft_exit_error("Too many philosophers.", data);
+	data->pids = malloc(sizeof(pid_t) * data->ph_c);
 	data->ttthink = data->ttdie - (data->tteat + data->ttsleep + THRESHOLD);
 	if (data->ttthink < 0)
 		data->ttthink = 0;
-	data->pid = malloc(sizeof(pid_t) * data->philos_count);
-	if (!data->forks || !data->pid)
+	if (!data->pids)
 		ft_exit_error("Malloc failed.", data);
 }
 
-
-
-
 /**
- * @brief Function that initializes the philosophers and forks.
- * This function initializes the philosophers and forks by setting their
- * initial values and initializing the mutexes.
+ * @brief Function that initializes semaphores for process communication.
  * @param argc The number of command line arguments.
  * @param argv The command line arguments.
  * @param data The data structure to initialize.
  */
 void	ft_initialize(int argc, char **argv, t_data *data)
 {
-	int		i;
-	pid_t	pid;
-
 	ft_init_data(argc, argv, data);
-	sem_unlink("/forks");
-	sem_unlink("/print");
-	sem_unlink("/finished");
-	data->forks = sem_open("/forks", O_CREAT | O_EXCL, 0644, data->philos_count);
-	data->print = sem_open("/print", O_CREAT | O_EXCL, 0644, 1);
-	data->finished = sem_open("/finished", O_CREAT | O_EXCL, 0644, 0);
-	if (data->forks == SEM_FAILED || data->print == SEM_FAILED || data->finished == SEM_FAILED)
+	sem_unlink("/philo_forks");
+	sem_unlink("/philo_print");
+	sem_unlink("/philo_finished");
+	sem_unlink("/philo_death");
+	data->forks = sem_open("/philo_forks", O_CREAT | O_EXCL, 0644, data->ph_c);
+	data->print = sem_open("/philo_print", O_CREAT | O_EXCL, 0644, 1);
+	data->finished = sem_open("/philo_finished", O_CREAT | O_EXCL, 0644, 0);
+	data->death = sem_open("/philo_death", O_CREAT | O_EXCL, 0644, 0);
+	if (data->forks == SEM_FAILED || data->print == SEM_FAILED
+		|| data->finished == SEM_FAILED || data->death == SEM_FAILED)
 		ft_exit_error("Failed to create semaphores.", data);
-	data->start = ft_get_time();
-	i = 0;
-	while (i < data->philos_count)
-	{
-		pid = fork();
-		if (pid == 0)
-		{
-			ft_philo_process(data, i);
-			ft_clean_exit(0);
-		}
-		else if (pid > 0)
-			data->pid[i] = pid;
-		else
-			ft_exit_error("Fork failed.", data);
-		i++;
-	}
-}
-
-/**
- * @brief Clean exit function for child processes
- * @param status Exit status
- */
-void	ft_clean_exit(int status)
-{
-	t_data	*data;
-
-	data = ft_get_data();
-	sem_close(data->forks);
-	sem_close(data->print);
-	sem_close(data->finished);
-	exit(status);
-}
-
-/**
- * @brief Monitor child processes and handle death/completion
- * @param data The data structure
- */
-void	ft_doctor(t_data *data)
-{
-	int		status;
-	int		finished_count;
-	pid_t	died_pid;
-
-	finished_count = 0;
-
-	while (1)
-	{
-		if (data->times_must_eat != -1)
-		{
-			while (sem_trywait(data->finished) == 0)
-			{
-				finished_count++;
-				if (finished_count >= data->philos_count)
-				{
-					printf("All philosophers have finished eating!\n");
-					ft_kill_all(data);
-					return;
-				}
-			}
-		}
-
-		// Check if any process died
-		died_pid = waitpid(-1, &status, WNOHANG);
-		if (died_pid > 0)
-		{
-			// A process ended - kill all others
-			if (WEXITSTATUS(status) == 1)
-			{
-				// Death occurred
-				ft_kill_all(data);
-				return;
-			}
-		}
-
-		usleep(1000);  // Small delay
-	}
-}
-
-/**
- * @brief Kill all philosopher processes
- * @param data The data structure
- */
-void	ft_kill_all(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->philos_count)
-	{
-		kill(data->pid[i], SIGTERM);
-		i++;
-	}
-	i = 0;
-	while (i < data->philos_count)
-	{
-		waitpid(data->pid[i], NULL, 0);
-		i++;
-	}
 }
